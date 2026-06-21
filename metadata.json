@@ -1,0 +1,6 @@
+{
+  "name": "Scribre by HLA",
+  "description": "An elegant, single-view Hausa and English audio transcriber featuring beautiful pink accents, powered by Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

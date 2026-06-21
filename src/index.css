@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@keyframes progressPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-progress-pulse {
+  background-size: 200% 200%;
+  animation: progressPulse 2s ease infinite;
+}
+
+/* Custom scroll bar style */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #f472b6;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #db2777;
+}
+
+@media print {
+  html, body {
+    background: white !important;
+    color: #0f172a !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+  
+  #scribre-header, 
+  #scribre-footer, 
+  .no-print, 
+  button, 
+  input, 
+  .bg-gradient-to-b, 
+  .rounded-full.blur-3xl {
+    display: none !important;
+  }
+
+  #scribre-main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    background: white !important;
+    color: #0f172a !important;
+  }
+
+  #scribre-completed-card {
+    background: white !important;
+    color: #0f172a !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Convert dark cards to clean printable containers */
+  .bg-slate-900\/90, 
+  .bg-slate-950\/70, 
+  .bg-slate-950\/60, 
+  .bg-slate-950,
+  .bg-slate-900\/40 {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Force every bit of text in the print area to dark, so nothing prints
+     invisibly (e.g. on-screen white/light text on the forced white page). */
+  #scribre-main,
+  #scribre-main * {
+    color: #0f172a !important;
+  }
+
+  /* Keep a subtle pink accent on the headings only. */
+  #scribre-completed-card h2,
+  #scribre-completed-card h3 {
+    color: #be185d !important;
+  }
+
+  .border, 
+  .border-t, 
+  .border-b, 
+  .border-slate-800,
+  .border-slate-850,
+  .divide-y {
+    border-color: #cbd5e1 !important;
+  }
+}
+

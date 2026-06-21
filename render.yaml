@@ -1,0 +1,23 @@
+# Render Blueprint for the Scribre transcription backend (Express + ffmpeg).
+#
+# Deploy: Render Dashboard -> New + -> Blueprint -> connect this repo.
+# Render reads this file and creates the service. After it is created, open the
+# service -> Environment and set GEMINI_API_KEY (it is intentionally NOT stored
+# in git).
+services:
+  - type: web
+    name: scribre-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false # set this yourself in the Render dashboard (kept out of git)
+      # Optional: lock the API to only your Netlify site. Uncomment + set after
+      # you know your Netlify URL, then redeploy.
+      # - key: ALLOWED_ORIGIN
+      #   value: https://YOUR-SITE.netlify.app

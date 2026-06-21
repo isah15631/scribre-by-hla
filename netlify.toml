@@ -1,0 +1,19 @@
+# Netlify hosts the Scribre FRONTEND only.
+# The transcription backend (Express + ffmpeg + long-running jobs) runs on Render
+# (see render.yaml) — Netlify cannot run a long-lived server.
+#
+# IMPORTANT: In Netlify -> Site configuration -> Environment variables, add
+#   VITE_API_BASE_URL = https://YOUR-BACKEND.onrender.com
+# It is read at BUILD time and baked into the frontend so it knows where the API
+# lives. If you forget it, the deployed site will try to call /api on Netlify and
+# every transcription will fail.
+
+[build]
+  command = "npm install && npx vite build"
+  publish = "dist"
+
+# Single-page-app fallback: serve index.html for any client route / refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

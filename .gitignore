@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Local backup snapshot created during development — do not deploy/commit.
+_backup_pre_longaudio/
