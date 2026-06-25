@@ -69,9 +69,10 @@ const INTER_CHUNK_DELAY_MS = 6500; // keep us comfortably under ~10 RPM free-tie
 function getPromptInstruction(promptMode: string): string {
   if (promptMode === "bilingual") {
     return `
-      Perform a professional, line-by-line VERBATIM TRANSCRIPTION of the provided audio recording.
+      Perform a professional, line-by-line transcription and translation of the provided audio recording.
       The audio may contain Hausa, English, or a mix of both (code-mixing/code-switching).
-      - Transcribe exactly what was said, word for word, in 'originalText'. Keep Hausa text in Hausa and English text in English, and preserve code-mixed speech exactly as spoken. Do NOT translate or paraphrase.
+      - Transcribe exactly what was said, word for word, in 'originalText'. Keep Hausa text in Hausa and English text in English, and preserve code-mixed speech exactly as spoken.
+      - Provide the complementary translation in 'translationText': if Hausa was spoken, translate it into natural English. If English was spoken, translate it into Hausa. If code-mixed, provide a clean, integrated English translation.
       - Set 'spokenLanguage' of each segment correctly to either 'Hausa', 'English', or 'Bilingual Code-Mixed'.
       - Identify speakers and estimate conversational timestamps for each segment.
     `;
@@ -148,12 +149,16 @@ const TRANSCRIBE_RESPONSE_SCHEMA: any = {
             type: Type.STRING,
             description: "The actual words spoken. If code-mixed, preserve both Hausa and English exactly as spoken.",
           },
+          translationText: {
+            type: Type.STRING,
+            description: "The translation. If spoken in Hausa, this is the English translation. If spoken in English, this is the Hausa translation.",
+          },
           spokenLanguage: {
             type: Type.STRING,
             description: "The language of this specific segment (e.g., 'Hausa', 'English', or 'Bilingual Code-Mixed').",
           },
         },
-        required: ["timestamp", "speaker", "originalText", "spokenLanguage"],
+        required: ["timestamp", "speaker", "originalText", "translationText", "spokenLanguage"],
       },
     },
   },
